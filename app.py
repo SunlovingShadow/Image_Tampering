@@ -11,11 +11,11 @@ import torchvision.transforms as transforms
 def load_models():
     model = create_model('efficientnet_b0', pretrained=False)
     model.classifier = torch.nn.Identity()
-    model.load_state_dict(torch.load("saved_models/efficientnet_b0_best.pth", map_location='cpu'))
+    model.load_state_dict(torch.load("efficientnet_b0_state_dict.pth", map_location='cpu'))
     model.eval()
 
-    svm = joblib.load("saved_models/svm_classifier.joblib")
-    scaler = joblib.load("saved_models/standard_scaler.joblib")
+    scaler = joblib.load("standard_scaler.joblib")
+    svm = joblib.load("svm_classifier.joblib")
     return model, svm, scaler
 
 model, svm_classifier, scaler = load_models()
